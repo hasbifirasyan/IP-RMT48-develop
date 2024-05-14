@@ -1,0 +1,34 @@
+{
+  "name": "ip-server",
+  "version": "1.0.0",
+  "description": "individual project p2 hasbi",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hasbifirasyan/IP-RMT48-develop.git"
+  },
+  "keywords": [
+    "client",
+    "server",
+    "individual",
+    "project"
+  ],
+  "author": "hasbi firasyan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hasbifirasyan/IP-RMT48-develop/issues"
+  },
+  "homepage": "https://github.com/hasbifirasyan/IP-RMT48-develop#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.11.5",
+    "sequelize": "^6.37.3"
+  }
+}
