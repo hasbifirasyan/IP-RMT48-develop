@@ -1,7 +1,7 @@
 export default function HotelCards() {
     return (
-        <div className="container mt-3">
-            <h2>Card titles, text, and links</h2>
+        <div className="container mt-4">
+            <h2>HOTEL 1</h2>
             <p>
                 Use .card-title to add card titles to any heading element. The .card-text
                 class is used to remove bottom margins for a p element if it is the last

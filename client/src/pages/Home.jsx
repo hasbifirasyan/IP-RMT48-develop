@@ -1,3 +1,4 @@
+import HotelCards from "../components/HotelCards"
 export default function Home() {
     return (
         <>
@@ -8,18 +9,13 @@ export default function Home() {
 
             <div
                 id="section1"
-                className="container-fluid"
+                className="container-fluid gap-4"
                 style={{ padding: "100px 20px" }}
             >
                 <h1>Section 1</h1>
-                <p>
-                    Try to scroll this section and look at the navigation bar while scrolling!
-                    Try to scroll this section and look at the navigation bar while scrolling!
-                </p>
-                <p>
-                    Try to scroll this section and look at the navigation bar while scrolling!
-                    Try to scroll this section and look at the navigation bar while scrolling!
-                </p>
+                <HotelCards />
+                <HotelCards />
+                <HotelCards />
             </div>
             <div
                 id="section2"
