@@ -1,5 +1,32 @@
+import { useEffect, useState } from "react"
 import HotelCards from "../components/HotelCards"
+import axios from 'axios'
+
 export default function Home() {
+    const [hotel, setHotel] = useState([])
+
+    const fetchData = async () => {
+        try {
+            let { data } = await axios.get('https://booking-com.p.rapidapi.com/v1/hotels/reviews', {
+                params: { locale: 'en-gb' },
+                headers: {
+                        'x-rapidapi-key': 'ac01d2dcb6mshae952bdb1a61dc8p1bd38ejsn00900591bab4',
+                        'x-rapidapi-host': 'booking-com.p.rapidapi.com',
+                        'Content-Type': 'application/json'
+                }
+            })
+            console.log({ data }, `<<<data`)
+            setHotel(data)
+            console.log(hotel,`<<<<hotel`)
+        } catch (error) {
+            console.log(error.response)
+        }
+
+    }
+    useEffect(() => {
+        fetchData();
+    }, [])
+
     return (
         <>
             <div className="mt-3 p-5">

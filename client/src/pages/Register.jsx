@@ -9,6 +9,16 @@ export default function Register() {
                                 <h3 className="mb-5">Register</h3>
                                 <div data-mdb-input-init="" className="form-outline mb-4">
                                     <label className="form-label" htmlFor="typeEmailX-2">
+                                        Full Name
+                                    </label>
+                                    <input
+                                        type="text"
+                                        id="fullname"
+                                        className="form-control form-control-lg"
+                                    />
+                                </div>
+                                <div data-mdb-input-init="" className="form-outline mb-4">
+                                    <label className="form-label" htmlFor="typeEmailX-2">
                                         Email
                                     </label>
                                     <input
@@ -46,7 +56,7 @@ export default function Register() {
                                     className="btn btn-primary btn-lg btn-block"
                                     type="submit"
                                 >
-                                    Login
+                                    Register
                                 </button>
                                 <hr className="my-4" />
                                 <button
@@ -56,7 +66,7 @@ export default function Register() {
                                     style={{ backgroundColor: "#dd4b39" }}
                                     type="submit"
                                 >
-                                    <i className="fab fa-google me-2" /> Sign in with google
+                                   <div className="g-signin2" data-onsuccess="onSignIn"></div>
                                 </button>
                             </div>
                         </div>
