@@ -8,7 +8,6 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Navbar from "./components/Navbar";
 import NavbarUnlogin from "./components/NavbarUnlogin";
-import Header from "./components/Header";
 import MyBookings from "./pages/MyBookings";
 
 

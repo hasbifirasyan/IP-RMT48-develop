@@ -13,11 +13,16 @@ export default function Login() {
         event.preventDefault();
         setLoading(true)
         try {
-            let { data } = await axios.post("https://api.p2.lc2s6.foxhub.space/login", {
+            let { data } = await axios.post("http://localhost:3000/login", {
                 email,
                 password
             })
             localStorage.setItem("access_token", data.access_token)
+            Swal.fire({
+                title: "Logged In!",
+                text: "Log in success!",
+                icon: "success"
+            });
             navigate('/')
 
         } catch (error) {
@@ -32,8 +37,27 @@ export default function Login() {
         }
     }
 
-    function handleCredentialResponse(response) {
+    async function handleCredentialResponse(response) {
         console.log("Encoded JWT ID token: " + response.credential);
+        const googleToken = response.credential;
+
+        try {
+            let { data } = await axios.post('http://localhost:3000/login/google', { googleToken })
+            localStorage.setItem("access_token", data.access_token)
+            Swal.fire({
+                title: "Logged In!",
+                text: "Log in using Google account success!",
+                icon: "success"
+            });
+            navigate('/')
+        } catch (error) {
+            console.log(error.response?.data.message || error.message)
+            Swal.fire({
+                title: "Error!",
+                text: error.response?.data.message || error.message,
+                icon: "error"
+            });
+        }
     }
 
     useEffect(() => {
@@ -45,8 +69,6 @@ export default function Login() {
             document.getElementById("buttonDiv"),
             { theme: "outline", size: "large" }  // customization attributes
         );
-
-
     }, [])
 
     return (
@@ -56,7 +78,7 @@ export default function Login() {
                     <div className="col-12 col-md-8 col-lg-6 col-xl-5">
                         <div className="card shadow-2-strong" style={{ borderRadius: "1rem" }}>
                             <div className="card-body p-5">
-                                <h3 className="mb-5">Sign in</h3>
+                                <h3 className="mb-5">Log in</h3>
                                 <form onSubmit={handleOnSubmit}>
                                     <div data-mdb-input-init="" className="form-outline mb-4">
                                         <label className="form-label" htmlFor="typeEmailX-2">
@@ -82,21 +104,9 @@ export default function Login() {
                                             onChange={(event) => setPassword(event.target.value)}
                                         />
                                     </div>
-                                    {/* Checkbox */}
-                                    <div className="form-check d-flex justify-content-start mb-4">
-                                        <input
-                                            className="form-check-input"
-                                            type="checkbox"
-                                            defaultValue=""
-                                            id="form1Example3"
-                                        />
-                                        <label className="form-check-label" htmlFor="form1Example3">
-                                            {" "}
-                                            Remember password{" "}
-                                        </label>
-                                    </div>
+
                                     <div className="d-grid gap-2">
-                                    {loading ? <div className="justtify-content-center spinner-border my-3"></div> : ""}
+                                        {loading ? <div className="justify-content-center spinner-border my-3"></div> : ""}
                                         <button
                                             data-mdb-button-init=""
                                             data-mdb-ripple-init=""
@@ -106,7 +116,6 @@ export default function Login() {
                                             Login
                                         </button>
                                     </div>
-                                   
                                     <p className="mt-3 text-center">
                                         Don`t have an account?{" "}
                                         <Link to={'/register'} className="link-info">Register</Link>
@@ -114,23 +123,20 @@ export default function Login() {
                                 </form>
                                 <hr className="my-2" />
                                 <p className="text-center">or</p>
-                                <div id="buttonDiv"> Sign in with google</div>
-                                {/* <button
-                                    data-mdb-button-init=""
-                                    data-mdb-ripple-init=""
-                                    className="btn btn-lg btn-block btn-outline-primary text-white"
-                                    style={{ backgroundColor: "#dd4b39" }}
-                                    type="submit"
-                                >
-                                    Sign in with google
-                                </button> */}
+                                <div className="container mt-4">
+                                    <div className="card border-0">
+
+                                        <div id="buttonDiv" className="mx-auto gap-2">Sign in with google</div>
+
+                                    </div>
+                                </div>
 
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </section >
 
 
 

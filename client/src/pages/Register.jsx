@@ -16,12 +16,16 @@ export default function Register() {
         event.preventDefault();
         setLoading(true)
         try {
-            await axios.post("https://api.p2.lc2s6.foxhub.space/register", {
+            await axios.post("http://localhost:3000/register", {
                 username,
                 email,
                 password,
             });
-
+            Swal.fire({
+                title: "Account Registered!",
+                text: "Register account success! Please log in.",
+                icon: "success"
+            });
             navigate("/login");
         } catch (error) {
             console.log(error.response?.data.message || error.message);
@@ -35,8 +39,27 @@ export default function Register() {
             setLoading(false)
         }
     };
-    function handleCredentialResponse(response) {
+    async function handleCredentialResponse(response) {
         console.log("Encoded JWT ID token: " + response.credential);
+        const googleToken  = response.credential;
+
+        try {
+            let { data } = await axios.post('http://localhost:3000/login/google', { googleToken })
+            localStorage.setItem("access_token", data.access_token)
+            Swal.fire({
+                title: "Logged In!",
+                text: "Log in using Google account success!",
+                icon: "success"
+            });
+            navigate('/')
+        } catch (error) {
+            console.log(error.response?.data.message || error.message)
+            Swal.fire({
+                title: "Error!",
+                text: error.response?.data.message || error.message,
+                icon: "error"
+            });
+        }
     }
 
     useEffect(() => {
@@ -97,12 +120,10 @@ export default function Register() {
                                             onChange={(event) => setPassword(event.target.value)}
                                         />
                                     </div>
-                                    {/* Checkbox */}
-                                    {loading ? <div className="spinner-border my-3"></div> : ""}
+                                    
+                                    {loading ? <div className="spinner-border my-3 card border-0"></div> : ""}
                                     <div className="d-grid gap-2">
                                         <button
-                                            data-mdb-button-init=""
-                                            data-mdb-ripple-init=""
                                             className="btn btn-outline-primary btn-lg btn-block"
                                             type="submit"
                                         >
@@ -117,7 +138,11 @@ export default function Register() {
                                 </form>
                                 <hr className="my-2" />
                                 <p className="text-center">or</p>
-                                <div id="buttonDiv"> Sign in with google</div>
+                                <div className="container mt-4">
+                                    <div className="card border-0">  
+                                        <div id="buttonDiv" className="mx-auto gap-2">Sign in with google</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
