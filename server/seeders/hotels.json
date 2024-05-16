@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Wellness Hotel Step",
+        "price": 150000,
+        "hotelClass": 5,
+        "address": "asd",
+        "numberOfRoom": 200,
+        "hotelDescription": "located in the city's business district of Kuningan, just 4 km from Kota Kasablanka and 5 km from Pacific Place.z",
+        "hotelFacilities": "Restaurant",
+        "imageUrl": "https://cf.bstatic.com/xdata/images/hotel/400x800/494158695.jpg?k=8cc3006351bb818aedcb05967f012b82f6f65aaa1d2417bd7d4c617d1046db32&o="
+    },
+    {
+        "name": "Hotel Jos",
+        "price": 50000,
+        "hotelClass": 5,
+        "address": "asd",
+        "numberOfRoom": 200,
+        "hotelDescription": "located in the most strategic town",
+        "hotelFacilities": "Restaurant, Swimming Pool",
+        "imageUrl": "https://cf.bstatic.com/xdata/images/hotel/400x800/513238165.jpg?k=89122ba18a38f5d4fa43f056f825c9560b4e3ba6b9bfd45698960326aaf4707d&o="
+    }
+]

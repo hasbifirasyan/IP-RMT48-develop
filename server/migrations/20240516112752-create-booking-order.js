@@ -10,10 +10,24 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       HotelId: {
-        type: Sequelize.INTEGER
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: 'Hotels',
+            key: 'id',
+          },
+        },
       },
       UserId: {
-        type: Sequelize.INTEGER
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: 'Users',
+            key: 'id',
+          },
+        },
       },
       checkinDate: {
         type: Sequelize.DATE

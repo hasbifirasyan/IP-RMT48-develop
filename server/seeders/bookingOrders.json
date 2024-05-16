@@ -1,0 +1,29 @@
+[
+    {
+        "HotelId": 1,
+        "UserId": 1,
+        "checkinDate": "2024-09-14",
+        "checkoutDate": "2024-09-20",
+        "paymentStatus": true,
+        "adultsNumber": 2,
+        "roomNumber": 1
+    },
+    {
+        "HotelId": 2,
+        "UserId": 1,
+        "checkinDate": "2024-09-13",
+        "checkoutDate": "2024-09-20",
+        "paymentStatus": true,
+        "adultsNumber": 2,
+        "roomNumber": 1
+    },
+    {
+        "HotelId": 2,
+        "UserId": 2,
+        "checkinDate": "2024-09-13",
+        "checkoutDate": "2024-09-18",
+        "paymentStatus": false,
+        "adultsNumber": 2,
+        "roomNumber": 2
+    }   
+]
