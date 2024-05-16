@@ -1,13 +1,37 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
-    const [email, setEmail] = useState()
-    const [password, setPassword] = useState()
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [loading, setLoading] = useState(false)
+    const navigate = useNavigate()
 
     const handleOnSubmit = async (event) => {
         event.preventDefault();
+        setLoading(true)
+        try {
+            let { data } = await axios.post("https://api.p2.lc2s6.foxhub.space/login", {
+                email,
+                password
+            })
+            localStorage.setItem("access_token", data.access_token)
+            navigate('/')
 
+        } catch (error) {
+            console.log(error.response?.data.message || error.message)
+            Swal.fire({
+                title: "Error!",
+                text: error.response?.data.message || error.message,
+                icon: "error"
+            });
+        } finally {
+            setLoading(false)
+        }
     }
+
     function handleCredentialResponse(response) {
         console.log("Encoded JWT ID token: " + response.credential);
     }
@@ -15,7 +39,7 @@ export default function Login() {
     useEffect(() => {
         google.accounts.id.initialize({
             client_id: "104930370327-iq20c5cqcgmrb7pbiuepevcumqptp73o.apps.googleusercontent.com",
-              callback: handleCredentialResponse
+            callback: handleCredentialResponse
         });
         google.accounts.id.renderButton(
             document.getElementById("buttonDiv"),
@@ -24,6 +48,7 @@ export default function Login() {
 
 
     }, [])
+
     return (
         <section className="vh-100" style={{ backgroundColor: "#508bfc" }}>
             <div className="container py-5 h-100">
@@ -70,16 +95,25 @@ export default function Login() {
                                             Remember password{" "}
                                         </label>
                                     </div>
-                                    <button
-                                        data-mdb-button-init=""
-                                        data-mdb-ripple-init=""
-                                        className="btn btn-primary btn-lg btn-block"
-                                        type="submit"
-                                    >
-                                        Login
-                                    </button>
+                                    <div className="d-grid gap-2">
+                                    {loading ? <div className="justtify-content-center spinner-border my-3"></div> : ""}
+                                        <button
+                                            data-mdb-button-init=""
+                                            data-mdb-ripple-init=""
+                                            className="btn btn-primary btn-lg btn-block "
+                                            type="submit"
+                                        >
+                                            Login
+                                        </button>
+                                    </div>
+                                   
+                                    <p className="mt-3 text-center">
+                                        Don`t have an account?{" "}
+                                        <Link to={'/register'} className="link-info">Register</Link>
+                                    </p>
                                 </form>
-                                <hr className="my-4" />
+                                <hr className="my-2" />
+                                <p className="text-center">or</p>
                                 <div id="buttonDiv"> Sign in with google</div>
                                 {/* <button
                                     data-mdb-button-init=""

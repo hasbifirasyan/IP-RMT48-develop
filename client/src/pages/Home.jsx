@@ -10,14 +10,14 @@ export default function Home() {
             let { data } = await axios.get('https://booking-com.p.rapidapi.com/v1/hotels/reviews', {
                 params: { locale: 'en-gb' },
                 headers: {
-                        'x-rapidapi-key': 'ac01d2dcb6mshae952bdb1a61dc8p1bd38ejsn00900591bab4',
-                        'x-rapidapi-host': 'booking-com.p.rapidapi.com',
-                        'Content-Type': 'application/json'
+                    'x-rapidapi-key': 'ac01d2dcb6mshae952bdb1a61dc8p1bd38ejsn00900591bab4',
+                    'x-rapidapi-host': 'booking-com.p.rapidapi.com',
+                    'Content-Type': 'application/json'
                 }
             })
             console.log({ data }, `<<<data`)
             setHotel(data)
-            console.log(hotel,`<<<<hotel`)
+            console.log(hotel, `<<<<hotel`)
         } catch (error) {
             console.log(error.response)
         }
@@ -29,9 +29,34 @@ export default function Home() {
 
     return (
         <>
-            <div className="mt-3 p-5">
-                <h1>Let's Check in Today</h1>
-                <p>Search for available hotel today</p>
+            <div className="mt-3 p-5 bg-primary">
+                <h1 className="text-white">Let`s Check in Today</h1>
+                <p className="text-white pb-4">Search for available hotel today</p>
+                <div className="search-bar bg-warning p-1 mx-5 rounded">
+                    <form className="d-flex " role="search">
+                        <input
+                            className="form-control me-2"
+                            type="search"
+                            placeholder="Where are you going?"
+                            aria-label="Search"
+                        />
+                        <input
+                            className="form-control me-2"
+                            type="search"
+                            placeholder="Search"
+                            aria-label="Search"
+                        />
+                        <input
+                            className="form-control me-2"
+                            type="search"
+                            placeholder="Search"
+                            aria-label="Search"
+                        />
+                        <button className="btn btn-primary text-white" type="submit">
+                            Search
+                        </button>
+                    </form>
+                </div>
             </div>
 
             <div
