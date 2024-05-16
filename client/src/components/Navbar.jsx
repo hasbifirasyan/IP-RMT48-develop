@@ -1,13 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
-import logo1 from "../assets/logo1.png";
+import logo1black from "../assets/logo1black.png";
 
 export default function Navbar() {
     const navigate = useNavigate();
 
     const handleOnLogout = (event) => {
         event.preventDefault()
-
         try {
             localStorage.removeItem("access_token");
             Swal.fire("Logged Out!");
@@ -27,7 +26,7 @@ export default function Navbar() {
             <div className="container-fluid">
                 <ul className="navbar-nav">
                     <li className="nav-item">
-                        <img src={logo1} alt="logo1" className="navbar-logo w-2" style={{ width: '100px', height: 'auto' }} />
+                        <img src={logo1black} alt="logo1" className="navbar-logo w-2" style={{ width: '100px', height: 'auto' }} />
                     </li>
                     <li className="nav-item">
                         <Link to={'/'} className="nav-link ms-3">Home</Link>

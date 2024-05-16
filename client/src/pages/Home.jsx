@@ -9,18 +9,16 @@ export default function Home() {
     const [hotels, setHotels] = useState([])
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
-    
+
     const fetchData = async () => {
         try {
-            let {data} = await axios.get('https://booking-com.p.rapidapi.com/v1/static/hotels?country=id', {
-                params: { locale: 'id' },
+            let data  = await axios.get('http://localhost:3000/hotels', {
                 headers: {
-                    'x-rapidapi-key': 'ac01d2dcb6mshae952bdb1a61dc8p1bd38ejsn00900591bab4',
-                    'x-rapidapi-host': 'booking-com.p.rapidapi.com',
-                    'Content-Type': 'application/json'
+                    Authorization: `Bearer ${localStorage.getItem("access_token")}`
                 }
             })
-            let hotels = data.result
+            let hotels =data.data.hotels
+            console.log({ hotels })
             setHotels(hotels)
         } catch (error) {
             console.log(error.response)
@@ -32,7 +30,7 @@ export default function Home() {
 
     // const handleOnSubmit = async (event) => {
     //     try {
-            
+
     //     } catch (error) {
     //         console.log(error.response)
     //     }
@@ -91,26 +89,26 @@ export default function Home() {
                             <h2>Filter</h2>
                             <label htmlFor="">By Hotel Class:</label>
                             <form className="d-flex flex-column gap-2">
-                                
-                                    <div className="mx-2">
-                                        <input type="checkbox" name="filter" />
-                                        <label className="mx-2" htmlFor="filter">5 stars</label>
-                                    </div>
-                                    <div className="mx-2">
-                                        <input type="checkbox" name="filter" />
-                                        <label className="mx-2" htmlFor="filter">4 stars</label>
-                                    </div>
-                                    <div className="mx-2">
-                                        <input type="checkbox" name="filter" />
-                                        <label className="mx-2" htmlFor="filter">&le; 3 stars</label>
-                                    </div>
 
-                       
+                                <div className="mx-2">
+                                    <input type="checkbox" name="filter" />
+                                    <label className="mx-2" htmlFor="filter">5 stars</label>
+                                </div>
+                                <div className="mx-2">
+                                    <input type="checkbox" name="filter" />
+                                    <label className="mx-2" htmlFor="filter">4 stars</label>
+                                </div>
+                                <div className="mx-2">
+                                    <input type="checkbox" name="filter" />
+                                    <label className="mx-2" htmlFor="filter">&le; 3 stars</label>
+                                </div>
 
 
-                                    <button className="btn btn-primary">Filter</button>
-                                    
-                             
+
+
+                                <button className="btn btn-primary">Filter</button>
+
+
                             </form>
                         </div>
                         <hr className="d-sm-none" />
@@ -118,7 +116,7 @@ export default function Home() {
 
                     <div className="col-sm-8 flex-fill ">
                         {hotels.length}
-                        {hotels.map((hotel)=> {
+                        {hotels.map((hotel) => {
                             return <HotelCards key={hotel.hotel_id} hotel={hotel} />
                         })}
                     </div>

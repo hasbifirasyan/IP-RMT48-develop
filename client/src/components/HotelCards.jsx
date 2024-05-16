@@ -15,7 +15,7 @@ export default function HotelCards({ hotel }) {
                     <div className="col-md-6">
                         <div className="card-body d-flex flex-column">
                             <h3 className="card-title">{hotel.name}</h3>
-                            <h7 className="card-subtitle mb-2 text-primary">{hotel.address}; {hotel.city}</h7>
+                            <h6 className="card-subtitle mb-2 text-primary">{hotel.address}; {hotel.city}</h6>
                             <p className="card-text text-secondary">Standard Twin Room</p>
 
 
@@ -25,7 +25,7 @@ export default function HotelCards({ hotel }) {
                         <div className="card-body d-flex flex-column align-items-end">
                             <div className="mb-3">
                                 <StarRatings
-                                    rating={hotel.hotel_class}
+                                    rating={hotel.hotelClass}
                                     starRatedColor="rgb(230, 67, 47)"
                                     numberOfStars={5}
                                     name='rating'
@@ -33,7 +33,7 @@ export default function HotelCards({ hotel }) {
                                     starSpacing="2px"
                                 />
                             </div>
-                            <h8><b>Rp250.000</b></h8>
+                            <h4><b>Rp250.000</b></h4>
                             <p>Include taxes and fees</p>
                             <button className="btn btn-sm btn-primary">Book Now &gt; </button>
                         </div>
@@ -41,7 +41,5 @@ export default function HotelCards({ hotel }) {
                 </div>
             </div>
         </div>
-
-
     )
 }

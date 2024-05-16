@@ -5,22 +5,8 @@ module.exports = class HotelController {
   static async getAllHotels(req, res, next) {
     try {
       let { data } = await axios.get(
-        "https://booking-com.p.rapidapi.com/v2/hotels/search",
+        "https://booking-com.p.rapidapi.com/v1/static/hotels?country=id",
         {
-          params: {
-            units: "metric",
-            room_number: "1",
-            order_by: "popularity",
-            checkout_date: "2024-05-20",
-            adults_number: "2",
-            dest_id: "99",
-            dest_type: "country",
-            checkin_date: "2024-05-19",
-            filter_by_currency: "IDR",
-            locale: "id",
-            page_number: "0",
-            include_adjacency: "true",
-          },
           headers: {
             "x-rapidapi-key": process.env.X_RAPIDAPI_KEY,
             "x-rapidapi-host": process.env.X_RAPIDAPI_HOST,
@@ -29,18 +15,19 @@ module.exports = class HotelController {
         }
       );
 
-      const hotels = data.results.map((hotel) => {
+      const hotels = data.result.map((hotel) => {
         return {
-          id: "rapidAPI-" + hotel.id,
+          id: "rapidAPI-" + hotel.hotel_id,
           name: hotel.name,
-          price: hotel.priceBreakdown.grossPrice.value,
-          hotelClass: hotel.propertyClass,
-         
-          // numberOfRoom: hotel.number_of_rooms,
-          // hotelDescription: hotel.hotel_description,
-          // hotelFacilities: "Restaurant",
-          imageUrl: hotel.photoMainUrl,
-          // CityId: hotel.city_id,
+          price: 212000,
+          hotelClass: hotel.hotel_class,
+          city: hotel.city,
+          address: hotel.address,
+          numberOfRoom: hotel.number_of_rooms,
+          hotelDescription: hotel.hotel_description,
+          hotelFacilities: "Restaurant, Parking",
+          // imageUrl: hotel.photoMainUrl,
+       
         };
       });
       console.log({ hotels });
