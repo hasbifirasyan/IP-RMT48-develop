@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
   })
 
 router.use(userRouters)
-router.use("/hotels", hotelsRouter);
+router.use("/hotels", authentication, hotelsRouter);
 
 
 
