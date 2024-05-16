@@ -23,7 +23,7 @@ export default function Navbar() {
 
     }
     return (
-        <nav className="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+        <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
             <div className="container-fluid">
                 <ul className="navbar-nav">
                     <li className="nav-item">
@@ -33,7 +33,7 @@ export default function Navbar() {
                         <Link to={'/'} className="nav-link ms-3">Home</Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link ms-3">My Bookings</Link>
+                        <Link to={'/mybookings'} className="nav-link ms-3">My Bookings</Link>
                     </li>
                 </ul>
                 <div className="profile-container"></div>
