@@ -31,6 +31,7 @@
     "google-auth-library": "^9.10.0",
     "jsonwebtoken": "^9.0.2",
     "pg": "^8.11.5",
+    "react-infinite-scroll-component": "^6.1.0",
     "sequelize": "^6.37.3",
     "xendit-node": "^5.0.0"
   }
