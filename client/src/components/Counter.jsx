@@ -10,18 +10,18 @@ export default function Counter() {
       <div>
         <span>Your Review: {count}</span>
       </div>
-      <div className='d-flex gap-2'>
+      <div className='d-flex gap-2 ms-3'>
         <button  className="btn btn-sm btn-primary"
           aria-label="Increment value"
           onClick={() => dispatch(increment())}
         >
-          Increment
+          +
         </button>
-        <button  className="btn btn-sm btn-primary"
+        <button  className="btn btn-sm btn-warning"
           aria-label="Decrement value"
           onClick={() => dispatch(decrement())}
         >
-          Decrement
+          -
         </button>
       </div>
     </div>

@@ -1,45 +1,38 @@
 import { useEffect, useState } from "react"
-import HotelCards from "../components/HotelCards"
-import axios from 'axios';
+import HotelCards from "../components/HotelCards"//
+//import axios from 'axios';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 import Filter from "../components/Filter";
 import Footer from "../components/Footer";
 
+import {
+    useSelector, // untuk ngambil data dari store
+    useDispatch // untuk trigger event => mempengaruhi data di store
+} from "react-redux"
+
+import {fetchHotel} from "../features/hotels/fetchHotelSlice"
+
 
 export default function Home() {
-    const [hotels, setHotels] = useState([])
+    
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
 
+    const h = useSelector(store => store.hotel.hotels)
 
-    const fetchData = async () => {
-        try {
-            
-            let data = await axios.get('http://localhost:3000/hotels', {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem("access_token")}`
-                }
-            })
-            let hotels = data.data.hotels
-            console.log({ hotels })
-            setHotels(hotels)
-        } catch (error) {
-            console.log(error.response)
-        }
-    }
+    const dispatch = useDispatch()
+
+    const fetchData = async () => { //diambil dari slicer
+        dispatch(fetchHotel())
+    };
+
     useEffect(() => {
         fetchData();
     }, [])
 
-    // const handleOnSubmit = async (event) => {
-    //     try {
-
-    //     } catch (error) {
-    //         console.log(error.response)
-    //     }
-    // }
+    useEffect(() => {console.log({h})}, [h])
 
     return (
         <>
@@ -92,7 +85,7 @@ export default function Home() {
                    <Filter/>
                     <div className="col-sm-8 flex-fill ">
                         
-                        {hotels.map((hotel) => {
+                        {h.map((hotel) => {
                             return <HotelCards key={hotel.hotel_id} hotel={hotel} />
                         })}
                     </div>

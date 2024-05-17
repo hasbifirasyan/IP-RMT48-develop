@@ -72,7 +72,7 @@ module.exports = class UserController {
     
       res
         .status(200)
-        .json({ message: "Login success!", access_token});
+        .json({access_token});
     } catch (error) {
       console.log(error);
     }

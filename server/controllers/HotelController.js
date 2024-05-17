@@ -71,8 +71,8 @@ module.exports = class HotelController {
           customer_notification_preference: {
             invoice_paid: ["email"],
           },
-          success_redirect_url: "http://localhost:3000/",
-          failure_redirect_url: "http://localhost:3000/",
+          success_redirect_url: "http://localhost:5173/?paymentStatus=success",
+          failure_redirect_url: "http://localhost:5173/?paymentStatus=failed",
         },
         {
           headers: {
