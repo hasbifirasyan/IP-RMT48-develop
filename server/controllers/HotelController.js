@@ -27,7 +27,6 @@ module.exports = class HotelController {
           hotelDescription: hotel.hotel_description,
           hotelFacilities: "Restaurant, Parking",
           // imageUrl: hotel.photoMainUrl,
-       
         };
       });
       console.log({ hotels });
@@ -52,4 +51,59 @@ module.exports = class HotelController {
       next(error);
     }
   }
+
+  static async generateXenditToken(req, res, next) {
+    try {
+      const authToken = Buffer.from(`${process.env.XENDIT_SECRET_KEY}:`).toString(
+        "base64"
+      );
+      const customer = req.user;
+      const { data, status } = await axios.post(
+        "https://api.xendit.co/v2/invoices",
+        {
+          external_id: "xendit_test_id_1",
+          amount: 212000,
+          currency: "IDR",
+          customer: {
+            given_names: customer.name,
+            email: customer.email,
+          },
+          customer_notification_preference: {
+            invoice_paid: ["email"],
+          },
+          success_redirect_url: "http://localhost:3000/",
+          failure_redirect_url: "http://localhost:3000/",
+        },
+        {
+          headers: {
+            Authorization: `Basic ${authToken}`,
+          },
+        }
+      );
+      console.log(`Response returned with a status of ${status}`);
+      const { invoice_url } = data;
+      console.log(`Invoice created! Visit ${invoice_url} to complete payment`);
+      res.status(200).json({invoice_url})
+    } catch (error) {
+      console.log(error,`<<generate`)
+      next(error);
+    }
+  }
+
+  static async XenditReceiveCallback(req, res, next) {
+    try {
+      const { body } = req;
+          if (body.status === "PAID") {
+            console.log(
+              `Invoice successfully paid with status ${body.status} and id ${body.id}`
+            );
+            res.sendStatus(200).end()
+          }
+    } catch (error) {
+      console.log(error,`<<callback`)
+      next(error);
+    }
+  }
+
+
 };
